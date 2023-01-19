@@ -6,17 +6,16 @@ from .models import User
 @app.route('/')
 def homepage():
     people = ['Brett','Jordan']
-    text = "sending this from python!!"
-    return render_template('index.html', people = people,my_text =text)
+    return render_template('index.html', people = people)
 
-@app.route('/contact')
-def contactPage():
-    return render_template('contact.html')
+@app.route('/friendly_battle')
+def friendly_battle():
+    return render_template('friendly_battle.html')
 
 
-@app.route('/about')
-def aboutPage():
-    return render_template('about.html')
+@app.route('/poke_selection')
+def apoke_selection():
+    return render_template('poke_selection.html')
 
 
 @app.route('/signup', methods=["GET", "POST"])
@@ -37,7 +36,11 @@ def signUpPage():
 
             user.saveToDB()
 
-            return redirect(url_for('contactPage'))
+            return redirect(url_for('friendly_battle'))
 
 
     return render_template('signup.html', form = form )
+
+@app.route('/login')
+def login():
+    return render_template('login.html')
