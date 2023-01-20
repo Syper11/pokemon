@@ -2,18 +2,27 @@
 {% block content %}
 
 
-    <h1>Sign Up Page</h1>
+    
 
-    <form method="POST" class="container col-4">
+    <form method="POST" class="container col-4" >
+        <h1>Sign Up Here!</h1>
+        <br>
         {{ form.hidden_tag() }}
 
         {{ form.first_name(class='form-control', placeholder='first_name') }}
+        <br>
         {{ form.last_name(class='form-control', placeholder='last_name') }}
+        <br>
         {{ form.username(class='form-control', placeholder='Username') }}
+        <br>
         {{ form.email(class='form-control', placeholder='Email') }}
+        <br>
         {{ form.confirm_email(class='form-control', placeholder='Confirm Email') }}
+        <br>
         {{ form.password(class='form-control', placeholder='Password') }}
+        <br>
         {{ form.confirm_password(class='form-control', placeholder='Confirm Password') }}
+        <br>
         {{ form.submit(class='btn btn-primary') }}
         
     </form>
