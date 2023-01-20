@@ -7,11 +7,15 @@
     <form method="POST" class="container col-4">
         {{ form.hidden_tag() }}
 
+        {{ form.first_name(class='form-control', placeholder='first_name') }}
+        {{ form.last_name(class='form-control', placeholder='last_name') }}
         {{ form.username(class='form-control', placeholder='Username') }}
         {{ form.email(class='form-control', placeholder='Email') }}
+        {{ form.confirm_email(class='form-control', placeholder='Confirm Email') }}
         {{ form.password(class='form-control', placeholder='Password') }}
         {{ form.confirm_password(class='form-control', placeholder='Confirm Password') }}
         {{ form.submit(class='btn btn-primary') }}
+        
     </form>
    
 
