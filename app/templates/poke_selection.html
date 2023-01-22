@@ -4,6 +4,31 @@
 <div class='container col-4'>
     <div class="row justify-content-center">
         <h1>Selecting a pokemon</h1>
+        <div class="input-group">
+        <form method='POST'>
+            {{ form.hidden_tag() }}
+            <div class="input-group">
+                {{ form.pokemon_name(class='form-control rounded', placeholder='Search') }}
+                {{ form.submit(class='btn btn-primary') }}
+            </div>
+        </div>
+        </form>
+    <div class="card mx-auto">
+        <img src="{{ specs['back_shiny']}}" class="card-img-top" alt="Pokemon"/>
+        <div class='card-body'>
+            <h5 class="card-title">{{ specs['name']}}</h5>
+            <p class="card-text">
+            <ul>
+                <li>Ability: {{ specs['ability'] }}  </li>
+                <li>Base Experience: {{ specs['base_experience'] }}  </li>
+                <!-- <li>Ability: {{ specs['ability'] }}  </li>
+                <li>Ability: {{ specs['ability'] }}  </li> -->
+                 
+            </ul>
+            </p>
+            <a href="#" class="btn btn-primary">Button</a>
+        </div>
+    </div>
     </div>
 </div>
     
