@@ -7,30 +7,32 @@ auth = Blueprint('auth', __name__, template_folder='auth_templates')
 
 
 @auth.route('/signup', methods=["GET", "POST"])
-def signUpPage():
+def signup():
     form = UserCreationForm()
     print(request.method)
     if request.method == 'POST':
         if form.validate():
+            first_name = form.first_name.data
+            last_name = form.last_name.data
             username = form.username.data
             email = form.email.data
             password = form.password.data
             
-            print(username, email, password)
+            print(first_name, last_name, username, email, password)
 
             # add user to database
-            user = User(username, email, password)
+            user = User(first_name, last_name, username, email, password)
             print(user)
 
             user.saveToDB()
 
-            return redirect(url_for('contactPage'))
+            return redirect(url_for('auth.login'))
 
 
     return render_template('signup.html', form = form )
 
 @auth.route('/login', methods=["GET", "POST"])
-def loginPage():
+def login():
     form = LoginForm()
 
     if request.method == "POST":
@@ -44,13 +46,13 @@ def loginPage():
                 #if user ecxists, check if passwords match
                 if user.password == password:
                     login_user(user)
-
+                    return redirect(url_for('apoke_selection'))
                 else:
                     print('wrong password')
 
             else:
                 print('user doesnt exist')
-
+            return redirect(url_for('auth.login'))
 
 
     return render_template('login.html', form = form)
@@ -59,4 +61,4 @@ def loginPage():
 @login_required
 def logoutRoute():
     logout_user()
-    return redirect(url_for('loginPage'))
+    return redirect(url_for('auth.login'))

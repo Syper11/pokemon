@@ -3,8 +3,8 @@ from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, EqualTo
 
 class UserCreationForm(FlaskForm):
-    first_name = StringField("first_name", validators = [DataRequired()])
-    last_name = StringField("last_name", validators = [DataRequired()])
+    first_name = StringField("First Name", validators = [DataRequired()])
+    last_name = StringField("Last Name", validators = [DataRequired()])
     username = StringField("Username", validators = [DataRequired()])
     email = StringField("Email", validators = [DataRequired()])
     confirm_email = StringField("Confirm Email", validators = [DataRequired(), EqualTo('email')])

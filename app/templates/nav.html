@@ -11,7 +11,7 @@
             <a class="nav-link active" aria-current="page" href="/">Poke Home</a>
           </li>
 
-
+          {% if current_user.is_authenticated %}
           <li class="nav-item">
             <a class="nav-link" href="/friendly_battle">Friendly Battle</a>
           </li>
@@ -23,6 +23,10 @@
           <li class="nav-item">
             <a class="nav-link" href="/logout">Log Out</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">{{ current_user.username }}</a>
+          </li>
+          {% else %}
 
           <li class="nav-item">
             <a class="nav-link" href="/signup">Sign Up</a>
@@ -30,6 +34,8 @@
 
           <li class="nav-item">
             <a class="nav-link" href="/login">Log In</a>
+          </li>
+          {% endif %}
           </li>
         
         </ul>
