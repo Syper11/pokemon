@@ -1,5 +1,5 @@
 from app import app, auth
-from flask import render_template, request, flash
+from flask import render_template, request, flash, url_for
 from .forms import PokemonSelect
 from pokemon import pokemon
 
