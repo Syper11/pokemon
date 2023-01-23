@@ -1,15 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="container col-4">
-    <h1>Pokemon Battle Home Page</h1>
+<div class="container">
+<div class="row justify-content-center">
+    <div class="w-auto p-3">
+        <img class="width auto" id="image" src="../static/pokemon.png">  
+    </div>
+</div>
 
-        <ul>
-            {% for person in people %}
-                    <li>
-                        {{ person }}
-                    </li>
-            {% endfor %}
-        </ul>
-
+</div>
+<div class="container">
+    <div class="row justify-content-center"> 
+        <h3>Welcome to this pokemon site please hit sign up to get started.</h3>
+        <h3>Or click on log in if you already have a account!</h3>
+    </div>
 </div>
 {% endblock %}

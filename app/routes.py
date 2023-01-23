@@ -6,8 +6,7 @@ from pokemon import pokemon
 
 @app.route('/')
 def homepage():
-    people = ['Brett','Jordan']
-    return render_template('index.html', people = people)
+    return render_template('index.html')
 
 @app.route('/friendly_battle')
 def friendly_battle():
