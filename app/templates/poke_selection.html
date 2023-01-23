@@ -18,7 +18,7 @@
 </div>
 <div class='container col-7'>
     <div class="row justify-content-center">
-        <div style="text-align: center;" class="input-group">
+    <div style="text-align: center;" class="input-group">
         <form method='POST'>
             {{ form.hidden_tag() }}
             <div class="input-group">
@@ -26,8 +26,8 @@
                 {{ form.submit(class='btn btn-primary') }}
             </div>
         </div>
-        </form>
-    <div class="card mx-auto">
+        {% if specs %}
+        <div class="card mx-auto">
         <img src="{{ specs['back_shiny']}}" class="card-img-top" alt="Pokemon"/>
         <div class=' card-body'>
             <h5 class="card-title">{{ specs['name']}}</h5>
@@ -37,13 +37,14 @@
                 <li>Base Experience: {{ specs['base_experience'] }}  </li>
                 <li>Attack Base: {{ specs['attack_base'] }}  </li>
                 <li>HP Base: {{ specs['hp_base'] }}  </li>
-                <li>Defense Base: {{ specs['defense_base'] }}  </li>
-                 
+                <li>Defense Base: {{ specs['defense_base'] }}  </li>   
             </ul>
-            </p>
             <a href="#" class="btn btn-primary">Save</a>
+        </form>
         </div>
+        
     </div>
+    {% endif %}
     </div>
 </div>
     

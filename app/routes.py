@@ -1,8 +1,7 @@
 from app import app, auth
 from flask import render_template, request, flash, url_for
 from .forms import PokemonSelect
-from pokemon import pokemon
-
+from .services import get_pokemon
 
 
 @app.route('/')
@@ -18,17 +17,15 @@ def friendly_battle():
 def apoke_selection():
     form = PokemonSelect()
     url = 'https://pokeapi.co/api/v2/pokemon/'
-    specs = {}
     if request.method == 'POST':
         if form.validate():
             # binding
             pokemon_name = form.pokemon_name.data
             print(pokemon_name)
-            char = pokemon(pokemon_name, url + pokemon_name)
-            specs = char.get_pokemon()
-            
+            specs = get_pokemon(url + pokemon_name)
+            return render_template('poke_selection.html',form = form, specs = specs)
 
-    return render_template('poke_selection.html',form = form, specs = specs)
+    return render_template('poke_selection.html',form = form)
 
 # @app.route('/poke_selection', methods = ["GET","POST"])
 # def AddPokemon():

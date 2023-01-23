@@ -29,7 +29,7 @@ class User(db.Model, UserMixin):
 
 # class Post(db.Model):
 #     id = db.Column(db.Integer, primary_key=True)
-#     back_shiny = db.Column(db.String(500), nullable=False, unique=True)
+#     back_shiny = db.Column(db.String(1000), nullable=False, unique=True)
 #     ability = db.Column(db.String(50), nullable=False, unique=True)
 #     base_experience = db.Column(db.String(45), nullable=False, unique=True)
 #     attack_base = db.Column(db.String(150), nullable=False, unique=True)
