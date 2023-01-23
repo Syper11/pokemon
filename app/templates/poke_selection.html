@@ -2,9 +2,9 @@
 {% block content %}
 
 
-<div class='container col-5'>
+<div class='container col-6'>
     <div class="row" >
-        <h1>Selecting a pokemon</h1>
+        <h1 style="text-align: center;">Selecting a pokemon</h1>
     <div>
 </div>
 <div class="container-fluid">
@@ -16,9 +16,9 @@
     <img class="ball" src="../static/master_ball.png" style="width:100px;height:100px">
 </div>
 </div>
-<div class='container col-5'>
+<div class='container col-7'>
     <div class="row justify-content-center">
-        <div class="input-group">
+        <div style="text-align: center;" class="input-group">
         <form method='POST'>
             {{ form.hidden_tag() }}
             <div class="input-group">
@@ -29,9 +29,9 @@
         </form>
     <div class="card mx-auto">
         <img src="{{ specs['back_shiny']}}" class="card-img-top" alt="Pokemon"/>
-        <div class='card-body'>
+        <div class=' card-body'>
             <h5 class="card-title">{{ specs['name']}}</h5>
-            <p class="card-text">
+            <p id="pokemon_card" class="card-text">
             <ul>
                 <li>Ability: {{ specs['ability'] }}  </li>
                 <li>Base Experience: {{ specs['base_experience'] }}  </li>
