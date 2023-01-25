@@ -1,4 +1,50 @@
 {% extends 'base.html' %}
 {% block content %}
 
+
+<div class='container col-6'>
+    <div class="row" >
+        <h1 style="text-align: center;">User</h1>
+    <div>
+</div>
+<div class="container-fluid">
+<div class="row justify-content-center">
+    <img class="ball" src="../static/poke_ball.png" style="width:100px;height:100px">
+    <img class="ball" src="../static/great_ball.png" style="width:100px;height:100px">
+    <img class="ball" src="../static/ultra_ball.png" style="width:100px;height:100px">
+    <img class="ball" src="../static/safari_ball.png" style="width:100px;height:100px">
+    <img class="ball" src="../static/master_ball.png" style="width:100px;height:100px">
+</div>
+</div>
+<div class='container col-7'>
+    <div class="row justify-content-center">
+    <div style="text-align: center;" class="input-group">
+        <form method='POST'>
+            <div class="input-group">
+                {{ form.hidden_tag() }}
+                {{ form.pokemon_name(class='form-control rounded', placeholder='Search') }}
+            </div>
+        </div>
+        <div class="card mx-auto">
+        <img src="{{ specs['back_shiny']}}" class="card-img-top" alt="Pokemon"/>
+        <div class=' card-body'>
+            <h5 class="card-title">{{ specs['name']}}</h5>
+            <p id="pokemon_card" class="card-text">
+            <ul>
+                <li>Ability: {{ specs['ability'] }}  </li>
+                <li>Base Experience: {{ specs['base_experience'] }}  </li>
+                <li>Attack Base: {{ specs['attack_base'] }}  </li>
+                <li>HP Base: {{ specs['hp_base'] }}  </li>
+                <li>Defense Base: {{ specs['defense_base'] }}  </li>   
+            </ul>
+            <a href="#" class="btn btn-primary">Release</a>
+        </form>
+        </div>
+        </div>  
+    </div>
+    </div>
+</div>
+    
+
+
 {% endblock %}

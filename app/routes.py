@@ -1,5 +1,5 @@
 from app import app, auth
-from flask import render_template, request, flash, url_for
+from flask import render_template, request, flash, url_for, redirect
 from .forms import PokemonSelect
 from .services import get_pokemon
 from .models import SearchPokemon, User
@@ -44,17 +44,19 @@ def Catch(pokemon_name):
         if len(catch) >= 5:
             print('No need to be greedy!')
         else:
+            print(f'You cought {pokemon_name}')
             current_user.catching(pokeName)
 
-        return render_template('poke_selection.html')
+        return redirect(url_for('Searching'))
     
-    return render_template('poke_selection.html')
+    return redirect(url_for('Searching'))
+    
 
-# @app.route('/user', methods=['GET','POST'])
-# @login_required
-# def UserPage(catchpokemon):
-#     pass
+@app.route('/user', methods=['GET','POST'])
+@login_required
+def UserPage():
 
+    return render_template('user.html')
 
 # @app.route('/user/release/>', methods=['GET','POST'])
 # @login_required
