@@ -4,7 +4,14 @@ from flask_login import UserMixin
 
 db = SQLAlchemy()
 
-# create models from out ERD
+
+catchpokemon = db.Table(
+    'catchpokemon',
+    db.Column('user_id', db.Integer, db.ForeignKey('user.id'), nullable=False),
+    db.Column('pokemon_name', db.String, db.ForeignKey('searchpokemon.Pokemon_Name'), nullable=False)
+)
+   
+
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(50), nullable=False, unique=True)
@@ -13,6 +20,11 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(150), nullable=False, unique=True)
     password = db.Column(db.String, nullable=False)
     date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
+    catch = db.relationship("SearchPokemon",
+        secondary = catchpokemon,
+        backref=db.backref('trainer', lazy='dynamic'),
+        lazy = 'dynamic'
+    )
     
 
     def __init__(self, first_name, last_name, username, email, password):
@@ -26,27 +38,29 @@ class User(db.Model, UserMixin):
         db.session.add(self)
         db.session.commit()
 
+    def catching(self, pokemon):
+        self.catch.append(pokemon)
+        db.session.commit()
 
-# class Post(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     back_shiny = db.Column(db.String(1000), nullable=False, unique=True)
-#     ability = db.Column(db.String(50), nullable=False, unique=True)
-#     base_experience = db.Column(db.String(45), nullable=False, unique=True)
-#     attack_base = db.Column(db.String(150), nullable=False, unique=True)
-#     hp_base = db.Column(db.String, nullable=False)
-#     defense_base = db.Column(db.String(50), nullable=False, unique=True)
-#     username = db.Column(db.String, db.ForeignKey('User.username'), nullable=False)
+    def Releasing(self, user):
+        self.catch.remove(user)
+        db.session.commit()
+
+
+
+
+class SearchPokemon(db.Model):
+    __tablename__= 'searchpokemon'
+    Search_id = db.Column(db.Integer, primary_key=True)
+    Pokemon_Name = db.Column(db.String(200), nullable=False, unique=True)
+
     
 
-#     def __init__(self, back_shiny, ability, base_experience, attack_base, hp_base, defense_base, username):
-#         self.back_shiny = back_shiny
-#         self.ability = ability
-#         self.base_experience = base_experience
-#         self.attack_base = attack_base
-#         self.hp_base = hp_base
-#         self.defense_base = defense_base
-#         self.username = username
+    def __init__(self, Pokemon_Name):
+        self.Pokemon_Name= Pokemon_Name
+        
 
-#     def saveToDB(self):
-#         db.session.add(self)
-#         db.session.commit()
+    def saveToDB(self):
+        db.session.add(self)
+        db.session.commit()
+

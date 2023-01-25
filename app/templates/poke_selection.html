@@ -20,8 +20,8 @@
     <div class="row justify-content-center">
     <div style="text-align: center;" class="input-group">
         <form method='POST'>
-            {{ form.hidden_tag() }}
             <div class="input-group">
+                {{ form.hidden_tag() }}
                 {{ form.pokemon_name(class='form-control rounded', placeholder='Search') }}
                 {{ form.submit(class='btn btn-primary') }}
             </div>
@@ -39,10 +39,10 @@
                 <li>HP Base: {{ specs['hp_base'] }}  </li>
                 <li>Defense Base: {{ specs['defense_base'] }}  </li>   
             </ul>
-            <a href="#" class="btn btn-primary">Save</a>
+            <a href="{{url_for ('Catch',pokemon_name=specs['name'])}}" class="btn btn-primary">Catch Pokemon</a>
         </form>
         </div>
-        
+        </div>  
     </div>
     {% endif %}
     </div>
