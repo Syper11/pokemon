@@ -25,7 +25,7 @@ class pokemon():
             self.specs['name'] = data['name']
             self.specs["base_experience"] = data["base_experience"]
             self.specs["ability"] = data["abilities"][0]['ability']['name']
-            self.specs["back_shiny"] = data["sprites"]["back_shiny"]
+            self.specs["front_shiny"] = data["sprites"]["front_shiny"]
             self.specs["attack_base"] = data["stats"][1]["base_stat"]
             self.specs["hp_base"] = data["stats"][0]["base_stat"]
             self.specs["defense_base"] = data["stats"][2]["base_stat"]
@@ -33,4 +33,4 @@ class pokemon():
         
     def __repr__(self) -> str:
         
-      return (f"Name:{self.specs['name']}\nBase EXP: {self.specs['base_experience']}\nAbility: {self.specs['ability']}\nShiny Images: {self.specs['back_shiny']}\n")
+      return (f"Name:{self.specs['name']}\nBase EXP: {self.specs['base_experience']}\nAbility: {self.specs['ability']}\nShiny Images: {self.specs['front_shiny']}\n")

@@ -44,7 +44,7 @@ def Catch(pokemon_name):
         if len(catch) >= 5:
             print('No need to be greedy!')
         else:
-            print(f'You cought {pokemon_name}')
+            print('You cought a pokemon')
             current_user.catching(pokeName)
 
         return redirect(url_for('Searching'))
@@ -54,11 +54,19 @@ def Catch(pokemon_name):
 
 @app.route('/user', methods=['GET','POST'])
 @login_required
-def UserPage():
+def userpage():
+    form = PokemonSelect()
+    url = 'https://pokeapi.co/api/v2/pokemon/'
+    if request.method == 'GET':
+        if form.validate():
+            pokemon_name = form.User.query.all()
+           
+            print(pokemon_name)
+            spec = get_pokemon(url + pokemon_name)
+            return render_template('user.html', form=form, spec = spec)
+    return render_template('user.html', form=form)
 
-    return render_template('user.html')
-
-# @app.route('/user/release/>', methods=['GET','POST'])
+# @app.route('/user/release/', methods=['GET','POST'])
 # @login_required
 # def Release(pokemon_name):
 #     pass

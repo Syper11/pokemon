@@ -10,7 +10,7 @@ def get_pokemon(pokedata):
             spec['name'] = data['name']
             spec["base_experience"] = data["base_experience"]
             spec["ability"] = data["abilities"][0]['ability']['name']
-            spec["back_shiny"] = data["sprites"]["back_shiny"]
+            spec["front_shiny"] = data["sprites"]["front_shiny"]
             spec["attack_base"] = data["stats"][1]["base_stat"]
             spec["hp_base"] = data["stats"][0]["base_stat"]
             spec["defense_base"] = data["stats"][2]["base_stat"]
