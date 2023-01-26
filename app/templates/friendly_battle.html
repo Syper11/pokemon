@@ -3,6 +3,16 @@
 
 <div class='container col-4'>
     <h1>Battle With Friends</h1>
-
 </div>
+{% for user in form %}
+<div>
+    {% if user %}
+    <div>
+        {% user %}
+
+    </div>
+</div>
+{% endif %}
+{% endfor %}
+
 {% endblock %}

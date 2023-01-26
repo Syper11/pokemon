@@ -12,8 +12,10 @@ def homepage():
 
 @app.route('/friendly_battle')
 @login_required
-def friendly_battle():
-    return render_template('friendly_battle.html')
+def friendly_battle(user_id):
+    form = SearchPokemon.query.find_by(user_id = user_id).all()
+
+    return render_template('friendly_battle.html',form = form)
 
 
 @app.route('/poke_selection', methods=['GET','POST'])
@@ -25,7 +27,7 @@ def Searching():
         if form.validate():
             # binding
             pokemon_name = form.pokemon_name.data
-            print(pokemon_name)
+            
             specs = get_pokemon(url + pokemon_name)
             search = SearchPokemon.query.filter_by(Pokemon_Name =pokemon_name).first()
             if not search:
@@ -35,7 +37,7 @@ def Searching():
 
     return render_template('poke_selection.html',form = form)
 
-@app.route('/catch/<pokemon_name>', methods=['GET','POST'])
+@app.route('/catch/<string:pokemon_name>', methods=['GET','POST'])
 @login_required
 def Catch(pokemon_name):
     pokeName = SearchPokemon.query.filter_by(Pokemon_Name =pokemon_name).first()
@@ -52,26 +54,27 @@ def Catch(pokemon_name):
     return redirect(url_for('Searching'))
     
 
-@app.route('/user', methods=['GET','POST'])
+@app.route('/user', methods=['GET'])
 @login_required
 def userpage():
-    form = PokemonSelect()
-    url = 'https://pokeapi.co/api/v2/pokemon/'
-    if request.method == 'GET':
-        if form.validate():
-            pokemon_name = form.User.query.all()
-           
-            print(pokemon_name)
-            spec = get_pokemon(url + pokemon_name)
-            return render_template('user.html', form=form, spec = spec)
-    return render_template('user.html', form=form)
+    pokename = current_user.catch
+    if pokename:
+        url = 'https://pokeapi.co/api/v2/pokemon/'
+        pokemon= [p.Pokemon_Name for p in pokename]
+        # poke = dict.fromkeys(pokemon, 1)
+        poke = []
+        print(poke)
+        for name in pokemon:
+            spec = get_pokemon(url + name)
+            print(spec)
+            poke.append(spec)
+        return render_template('user.html', poke = poke)
 
-# @app.route('/user/release/', methods=['GET','POST'])
-# @login_required
-# def Release(pokemon_name):
-#     pass
-#     # pokeName = User.query.get(user_id=current_user, pokemon_name=pokemon_name).first()
-#     # if pokeName:
-#     #     pokeName.deleteFromDB()
-
-#     # return render_template('poke_selection.html')
+   
+@app.route('/user/<string:pokemon_name>', methods=['GET','POST'])
+@login_required
+def Release(pokemon_name):
+    pokeName = SearchPokemon.query.filter_by(Pokemon_Name =pokemon_name).first()
+    if pokeName:
+        current_user.Releasing(pokeName)
+        return redirect(url_for('Searching'))

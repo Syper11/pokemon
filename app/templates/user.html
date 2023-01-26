@@ -3,45 +3,48 @@
 
 
 <div class='container col-6'>
-    <div class="row" >
+    <div class="row">
         <h1 style="text-align: center;">User</h1>
-    <div>
-</div>
-
-{% for specs in spec %}
-
-<div class='container col-7'>
-    <div class="row justify-content-center">
-    <div style="text-align: center;" class="input-group">
-        <form method='POST'>
-            <div class="input-group">
-                <div class="card mx-auto">
-                    <img src="{{ specs['front_shiny']}}" class="card-img-top" alt="Pokemon"/>
-                    <div class=' card-body'>
-                        <h5 class="card-title">{{ specs['name']}}</h5>
-                        <p id="pokemon_card" class="card-text">
-                        <ul>
-                            <li>{{ specs['front_shiney'] }}  </li>
-                            <li>Ability: {{ specs['ability'] }}  </li>
-                            <li>Base Experience: {{ specs['base_experience'] }}  </li>
-                            <li>Attack Base: {{ specs['attack_base'] }}  </li>
-                            <li>HP Base: {{ specs['hp_base'] }}  </li>
-                            <li>Defense Base: {{ specs['defense_base'] }}  </li>   
-                        </ul>
-                        <a href="#" class="btn btn-primary">Release</a>
-                    </div>
-                </div>
-            </div>
-        </form>
+        <div>
         </div>
-        </div>  
-    </div>
-    
-    </div>
-</div>
-
-{% endfor %}
-    
 
 
-{% endblock %}
+
+        <div class='container'>
+            <div class="row">
+                {% for spec in poke%}
+                <div class="col-2">
+                <div style="text-align: center;" class="input-group">
+                    <form method='POST'>
+                        <div class="input-group">
+                            <div class="card mx-auto">
+                                <img src="{{ spec['front_shiny']}}" class="card-img-top" alt="Pokemon" />
+                                <div class=' card-body'>
+                                    <h5 class="card-title">{{ spec['name']}}</h5>
+                                    <p id="pokemon_card" class="card-text">
+                                    <ul>
+                                        <li>{{ spec['front_shiney'] }} </li>
+                                        <li>Ability: {{ spec['ability'] }} </li>
+                                        <li>Base Experience: {{ spec['base_experience'] }} </li>
+                                        <li>Attack Base: {{ spec['attack_base'] }} </li>
+                                        <li>HP Base: {{ spec['hp_base'] }} </li>
+                                        <li>Defense Base: {{ spec['defense_base'] }} </li>
+                                    </ul>
+                                    <a href="{{url_for ('Release',pokemon_name=spec['name'])}}"
+                                        class="btn btn-primary">Release</a> -->
+
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+
+
+
+
+        {% endblock %}

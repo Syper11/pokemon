@@ -12,7 +12,7 @@ catchpokemon = db.Table(
 )
    
 
-class User(db.Model, UserMixin):
+class  User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(50), nullable=False, unique=True)
     last_name = db.Column(db.String(50), nullable=False, unique=True)
@@ -23,7 +23,6 @@ class User(db.Model, UserMixin):
     catch = db.relationship("SearchPokemon",
         secondary = catchpokemon,
         backref=db.backref('trainer', lazy='dynamic'),
-        lazy = 'dynamic'
     )
     
 
@@ -43,7 +42,7 @@ class User(db.Model, UserMixin):
         db.session.commit()
 
     def Releasing(self, user):
-        self.catch.remove(user)
+        db.session.delete(user)
         db.session.commit()
 
 
