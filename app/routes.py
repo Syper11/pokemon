@@ -14,7 +14,6 @@ def homepage():
 @login_required
 def friendly_battle():
     form = User.query.all()
-    print(form)
     pokename = current_user.catch
     if pokename:
         url = 'https://pokeapi.co/api/v2/pokemon/'
@@ -34,13 +33,31 @@ def friendly_battle():
                 for name in badpokemon:
                     spec = get_pokemon(url + name)
                     badpoke.append(spec)
-                print(badpoke)
-                return render_template('friendly_battle.html',badpoke=badpoke)
+                
+                return render_template('friendly_battle.html',badpoke=badpoke, poke=poke)
         return render_template('friendly_battle.html',form=form, poke=poke)   
     
    
     return render_template('friendly_battle.html')
 
+@app.route('/battle/<user_id>', methods=['GET', 'POST'])
+@login_required
+def battle(user_id):
+    bad_user = User.query.get(user_id)
+    my_pokemon = current_user.catch
+    enemy = bad_user.catch
+    
+    my_pokemon_list = []
+    enemy_pokemon_list = []
+
+    for poke in my_pokemon:
+        my_pokemon_list.append(poke)
+
+    for poke in enemy:
+        enemy_pokemon_list.append(poke)
+    print(my_pokemon_list)
+    print(enemy_pokemon_list)
+    
 
 @app.route('/poke_selection', methods=['GET','POST'])
 @login_required
