@@ -10,12 +10,23 @@ from flask_login import current_user, login_required
 def homepage():
     return render_template('index.html')
 
-@app.route('/friendly_battle')
+@app.route('/friendly_battle', methods=['GET', 'POST'])
 @login_required
-def friendly_battle(user_id):
-    form = SearchPokemon.query.find_by(user_id = user_id).all()
-
-    return render_template('friendly_battle.html',form = form)
+def friendly_battle():
+    # form = User.query.filter_by(id = user_id).all()
+    # print(form)
+    pokename = current_user.catch
+    if pokename:
+        url = 'https://pokeapi.co/api/v2/pokemon/'
+        pokemon= [p.Pokemon_Name for p in pokename]
+        poke = []
+        for name in pokemon:
+            spec = get_pokemon(url + name)
+            poke.append(spec)
+        return render_template('friendly_battle.html', poke=poke)   
+    
+   
+    return render_template('friendly_battle.html')
 
 
 @app.route('/poke_selection', methods=['GET','POST'])
@@ -37,7 +48,7 @@ def Searching():
 
     return render_template('poke_selection.html',form = form)
 
-@app.route('/catch/<string:pokemon_name>', methods=['GET','POST'])
+@app.route('/catch/<pokemon_name>', methods=['GET','POST'])
 @login_required
 def Catch(pokemon_name):
     pokeName = SearchPokemon.query.filter_by(Pokemon_Name =pokemon_name).first()
@@ -61,12 +72,10 @@ def userpage():
     if pokename:
         url = 'https://pokeapi.co/api/v2/pokemon/'
         pokemon= [p.Pokemon_Name for p in pokename]
-        # poke = dict.fromkeys(pokemon, 1)
+        print(pokemon)
         poke = []
-        print(poke)
         for name in pokemon:
             spec = get_pokemon(url + name)
-            print(spec)
             poke.append(spec)
         return render_template('user.html', poke = poke)
 

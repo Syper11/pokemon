@@ -4,15 +4,51 @@
 <div class='container col-4'>
     <h1>Battle With Friends</h1>
 </div>
-{% for user in form %}
-<div>
-    {% if user %}
-    <div>
-        {% user %}
+<div class='container'>
+    <div class="row">
+        {% for spec in poke%}
+        <div class="col-2">
+            <div style="text-align: center;" class="input-group">
+                <form method='POST'>
+                    <div class="input-group">
+                        <div class="card mx-auto">
+                            <img src="{{ spec['front_shiny']}}" class="card-img-top" alt="Pokemon" />
+                            <div class=' card-body'>
+                                <h5 class="card-title">{{ spec['name']}}</h5>
+                                <p id="pokemon_card" class="card-text">
+                                <ul>
+                                    <li>{{ spec['front_shiney'] }} </li>
+                                    <li>Ability: {{ spec['ability'] }} </li>
+                                    <li>Base Experience: {{ spec['base_experience'] }} </li>
+                                    <li>Attack Base: {{ spec['attack_base'] }} </li>
+                                    <li>HP Base: {{ spec['hp_base'] }} </li>
+                                    <li>Defense Base: {{ spec['defense_base'] }} </li>
+                                </ul>
 
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
     </div>
 </div>
-{% endif %}
-{% endfor %}
+<div class="container">
+    <div class="row">
+        <a href="#" class="btn btn-primary">Battle</a>
+    </div>
+</div>
+<div class="container">
+    <div>
+        {% for user in form %}
+        <button type="button" class="user.id">Link</button>
+
+    </div>
+    {% endfor %}
+</div>
+
+
 
 {% endblock %}

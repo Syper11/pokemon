@@ -23,6 +23,8 @@ class  User(db.Model, UserMixin):
     catch = db.relationship("SearchPokemon",
         secondary = catchpokemon,
         backref=db.backref('trainer', lazy='dynamic'),
+        lazy='dynamic'
+
     )
     
 
