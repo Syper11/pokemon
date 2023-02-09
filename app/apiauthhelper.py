@@ -26,7 +26,6 @@ def verifyToken(token):
 def basic_auth_required(func):
 
     def decorated(*args, **kwargs):
-        #before:
         if 'Authorization' in request.headers:
             val = request.headers['Authorization']
             encoded_version = val.split()[1]
@@ -44,8 +43,6 @@ def basic_auth_required(func):
         user = User.query.filter_by(username=username).first()
         if user:
             if user.password == password:
-                # YAY
-                # give them their token.
                 return func(user=user, *args, **kwargs)
             else:
                 return {
@@ -64,7 +61,6 @@ def basic_auth_required(func):
 def token_auth_required(func):
 
     def decorated(*args, **kwargs):
-        #before:
         if 'Authorization' in request.headers:
             val = request.headers['Authorization']
     

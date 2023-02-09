@@ -2,6 +2,7 @@ from flask import Blueprint, request
 from ..models import User
 from ..apiauthhelper import basic_auth
 from flask_cors import cross_origin
+
 api = Blueprint('api', __name__)
 
 
