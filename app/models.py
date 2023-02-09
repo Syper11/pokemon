@@ -1,6 +1,8 @@
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from flask_login import UserMixin
+from secrets import token_hex
+from werkzeug.security import generate_password_hash
 
 db = SQLAlchemy()
 
@@ -33,7 +35,8 @@ class  User(db.Model, UserMixin):
         self.last_name = last_name
         self.username = username
         self.email = email
-        self.password = password
+        self.password = generate_password_hash(password)
+        self.apitoken = token_hex(16)
 
     def saveToDB(self):
         db.session.add(self)
@@ -47,7 +50,13 @@ class  User(db.Model, UserMixin):
         db.session.delete(user)
         db.session.commit()
 
-
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'username' : self.username,
+            'email' : self.email,
+            'apitoken' : self.apitoken
+        }
 
 
 class SearchPokemon(db.Model):
